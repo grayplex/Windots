@@ -6,42 +6,43 @@ $symlinks = @{
     $PROFILE.CurrentUserAllHosts                                                                    = ".\Profile.ps1"
     "$HOME\AppData\Local\nvim"                                                                      = ".\nvim"
     "$HOME\AppData\Local\fastfetch"                                                                 = ".\fastfetch"
-    "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" = ".\windowsterminal\settings.json"
+    #"$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" = ".\windowsterminal\settings.json"
+    #"$HOME\AppData\Local\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json" = ".\windowsterminal\settings.json"
     "$HOME\.gitconfig"                                                                              = ".\.gitconfig"
     "$HOME\AppData\Roaming\lazygit"                                                                 = ".\lazygit"
-    "$HOME\AppData\Roaming\AltSnap\AltSnap.ini"                                                     = ".\altsnap\AltSnap.ini"
-    "$ENV:PROGRAMFILES\WezTerm\wezterm_modules"                                                     = ".\wezterm\"
+    #"$HOME\AppData\Roaming\AltSnap\AltSnap.ini"                                                     = ".\altsnap\AltSnap.ini"
+    #"$ENV:PROGRAMFILES\WezTerm\wezterm_modules"                                                     = ".\wezterm\"
 }
 
 # Winget & choco dependencies
 $wingetDeps = @(
     "chocolatey.chocolatey"
     "eza-community.eza"
-    "ezwinports.make"
+    #"ezwinports.make"
     "fastfetch-cli.fastfetch"
     "gerardog.gsudo"
     "git.git"
     "github.cli"
-    "kitware.cmake"
+    #"kitware.cmake"
     "mbuilov.sed"
-    "microsoft.powershell"
+    #"microsoft.powershell"
     "neovim.neovim"
-    "openjs.nodejs"
+    #"openjs.nodejs"
     "starship.starship"
 )
 $chocoDeps = @(
-    "altsnap"
+    #"altsnap"
     "bat"
     "fd"
     "fzf"
     "gawk"
     "lazygit"
-    "mingw"
-    "nerd-fonts-jetbrainsmono"
+    #"mingw"
+    "nerd-fonts-CascadiaCode"
     "ripgrep"
     "sqlite"
-    "wezterm"
-    "zig"
+    #"wezterm"
+    #"zig"
     "zoxide"
 )
 
@@ -88,7 +89,7 @@ if (Test-Path "$env:USERPROFILE\AppData\Roaming\Microsoft\Windows\Start Menu\Pro
 }
 
 # Persist Environment Variables
-[System.Environment]::SetEnvironmentVariable('WEZTERM_CONFIG_FILE', "$PSScriptRoot\wezterm\wezterm.lua", [System.EnvironmentVariableTarget]::User)
+#[System.Environment]::SetEnvironmentVariable('WEZTERM_CONFIG_FILE', "$PSScriptRoot\wezterm\wezterm.lua", [System.EnvironmentVariableTarget]::User)
 
 $currentGitEmail = (git config --global user.email)
 $currentGitName = (git config --global user.name)
@@ -109,4 +110,4 @@ git config --global user.name $currentGitName | Out-Null
 bat cache --clear
 bat cache --build
 
-.\altsnap\createTask.ps1 | Out-Null
+#.\altsnap\createTask.ps1 | Out-Null
