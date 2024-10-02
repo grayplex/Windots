@@ -5,3 +5,6 @@
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 [fetch]
     prune = true
+[user]
+	name = Ken Schultz
+	email = Ken.Schultz@uline.com
