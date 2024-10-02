@@ -13,9 +13,10 @@ return {
                 json = { "prettier" },
                 lua = { "stylua" },
                 markdown = { "prettier" },
-                ps1 = { "powershell", "trim_whitespace", "trim_newlines" },
+                nix = { "nixfmt" },
                 scss = { "prettier" },
                 sh = { "shfmt" },
+                templ = { "templ" },
                 toml = { "taplo" },
                 yaml = { "prettier" },
             },
@@ -24,7 +25,11 @@ return {
                 if vim.g.disable_autoformat then
                     return
                 else
-                    return { lsp_fallback = true }
+                    if vim.bo.filetype == "ps1" then
+                        vim.lsp.buf.format()
+                        return
+                    end
+                    return { lsp_format = "fallback" }
                 end
             end,
 
@@ -32,19 +37,6 @@ return {
                 goimports_reviser = {
                     command = "goimports-reviser",
                     args = { "-output", "stdout", "$FILENAME" },
-                },
-                powershell = {
-                    command = "pwsh",
-                    args = {
-                        "-NoLogo",
-                        "-NoProfile",
-                        "-NonInteractive",
-                        "-Command",
-                        "(Invoke-Formatter",
-                        "(Get-Content -Raw -Path",
-                        "$FILENAME",
-                        ")).Trim()",
-                    },
                 },
             },
         })

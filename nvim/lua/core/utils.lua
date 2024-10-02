@@ -47,12 +47,21 @@ end
 
 --- Switch to the previous buffer
 function M.switch_to_other_buffer()
+    -- try alternate buffer first
     local ok, _ = pcall(function()
         vim.cmd("buffer #")
     end)
-    if not ok then
-        vim.notify("No other buffer to switch to!", 3, { title = "Warning" })
+    if ok then
+        return
     end
+
+    -- fallback to previous buffer
+    if M.get_buffer_count() > 1 then
+        vim.cmd("bprevious")
+        return
+    end
+
+    vim.notify("No other buffer to switch to!", 3, { title = "Warning" })
 end
 
 --- Get the number of open buffers
@@ -101,7 +110,7 @@ end
 --- Open the help window in a floating window
 --- @param buf number The buffer number
 function M.open_help(buf)
-    if buf ~= nil and vim.bo[buf].filetype == "help" then
+    if buf ~= nil and vim.bo[buf].filetype == "help" and not vim.bo[buf].modifiable then
         local help_win = vim.api.nvim_get_current_win()
         local new_win = M.open_centered_float(0.6, 0.7, buf)
 

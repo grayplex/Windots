@@ -40,6 +40,8 @@ return {
             "jsonls",
             "tailwindcss",
             "taplo",
+            "templ", -- requires gopls in PATH, mason probably won't work depending on the OS
+            "nil_ls",
             "yamlls",
         }
         for _, server in pairs(no_config_servers) do
@@ -59,30 +61,10 @@ return {
             },
         })
 
-        -- Templ
-        require("lspconfig").templ.setup({})
-        vim.filetype.add({
-            extension = {
-                templ = "templ",
-            },
-        })
-
         -- Bicep
-        local bicep_path = vim.fn.stdpath("data") .. "/mason/packages/bicep-lsp/bicep-lsp.cmd"
+        local bicep_path = vim.fn.stdpath("data") .. "/mason/packages/bicep-lsp/bicep-lsp"
         require("lspconfig").bicep.setup({
             cmd = { bicep_path },
-        })
-        vim.filetype.add({
-            extension = {
-                bicepparam = "bicep",
-            },
-        })
-
-        -- C#
-        local omnisharp_path = vim.fn.stdpath("data") .. "/mason/packages/omnisharp/libexec/omnisharp.dll"
-        require("lspconfig").omnisharp.setup({
-            cmd = { "dotnet", omnisharp_path },
-            enable_ms_build_load_projects_on_demand = true,
         })
 
         -- Lua
@@ -112,6 +94,7 @@ return {
         local bundle_path = mason_registry.get_package("powershell-editor-services"):get_install_path()
         require("lspconfig").powershell_es.setup({
             bundle_path = bundle_path,
+            settings = { powershell = { codeFormatting = { Preset = "Stroustrup" } } },
         })
     end,
 }

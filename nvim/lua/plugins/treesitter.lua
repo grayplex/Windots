@@ -9,6 +9,7 @@ return {
         ensure_installed = {
             "bash",
             "bicep",
+            "c_sharp",
             "gitignore",
             "go",
             "gomod",
@@ -22,6 +23,7 @@ return {
             "luap",
             "markdown",
             "markdown_inline",
+            "nix",
             "powershell",
             "regex",
             "templ",
